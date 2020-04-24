@@ -1,0 +1,18 @@
+{
+  "name": "puppeteertest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "puppeteer-core": "^3.0.1"
+  },
+  "devDependencies": {
+    "chrome-aws-lambda": "^2.1.1",
+    "serverless-offline": "^5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Pirt",
+  "license": "ISC"
+}
