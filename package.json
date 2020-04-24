@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "chrome-aws-lambda": "^2.1.1",
+    "puppeteer": "^3.0.1",
     "serverless-offline": "^5"
   },
   "scripts": {
