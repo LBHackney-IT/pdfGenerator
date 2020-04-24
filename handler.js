@@ -5,10 +5,10 @@ const pdfOptions = {
   printBackground: true,
   format: "A4",
   margin: {
-    top: "0mm",
-    right: "0mm",
-    bottom: "0mm",
-    left: "0mm",
+    top: "5mm",
+    right: "15mm",
+    bottom: "5mm",
+    left: "15mm",
   },
 };
 
