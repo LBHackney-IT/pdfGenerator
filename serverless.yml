@@ -19,7 +19,7 @@ provider:
     - arn:aws:lambda:eu-west-2:764866452798:layer:chrome-aws-lambda:8
 
 functions:
-  hello:
+  convert:
     handler: handler.convert
     role: arn:aws:iam::775052747630:role/LBH_Lambda_Execution
     events:
