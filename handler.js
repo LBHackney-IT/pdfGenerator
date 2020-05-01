@@ -42,7 +42,7 @@ module.exports.convert = async (event) => {
       body: pdf.toString('base64'),
       isBase64Encoded: true,
     };
-  } catch {
+  } catch (e) {
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
