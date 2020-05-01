@@ -23,17 +23,28 @@ const convertFile = async (inType, outType, name) => {
       'Content-Type': headers[inType],
       Accept: headers[outType],
     },
-  }).then((res) => res.arrayBuffer());
+  }).then(async (res) => {
+    const body = await res.arrayBuffer()
+    return {
+      status: res.status,
+      headers: res.headers,
+      body
+    };
+  });
 };
 
 describe('Converting RTF to HTML', () => {
   for (let htmlFile of htmlFiles) {
     const pdfFile = htmlFile.replace('.html', '.pdf');
     it(`renders file ${htmlFile} to ${pdfFile}`, async function () {
-      const convertedFile = await convertFile('html', 'pdf', htmlFile);
+      const response = await convertFile('html', 'pdf', htmlFile);
       const expectedFile = readFixture('pdf', pdfFile);
+      expect(response.status).toEqual(200);
+      expect(response.headers.get('content-type')).toEqual('application/pdf');
+      const body = Buffer.from(response.body);
+      expect(body.length).toEqual(expectedFile.length);
       expect(
-        !!Buffer.compare(Buffer.from(convertedFile), Buffer.from(expectedFile))
+        !!Buffer.compare(Buffer.from(response.body), Buffer.from(expectedFile))
       ).toBe(true);
     });
   }
