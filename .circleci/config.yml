@@ -14,12 +14,9 @@ jobs:
     steps:
       - checkout
 
-      - setup_remote_docker
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
 
       - run:
           name: Install dependencies
@@ -34,14 +31,6 @@ jobs:
       - run:
           name: Run linter
           command: npm run lint
-
-      # - run:
-      #     name: Run tests
-      #     command: make build test-ci
-
-      - run:
-          name: Build layers
-          command: make perl-layer image-layer
 
       - run:
           name: Install Serverless CLI
