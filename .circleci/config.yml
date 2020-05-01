@@ -48,7 +48,7 @@ jobs:
 
       - run:
           name: Test application
-          command: TEST_URL=${TEST_ENDPOINT_TEST} make test-ci
+          command: TEST_URL=${TEST_ENDPOINT_TEST} node ./node_modules/jest/bin/jest.js
           
       - persist_to_workspace:
           root: ~/repo
@@ -77,7 +77,7 @@ jobs:
 
       - run:
           name: Test application
-          command: TEST_URL=${TEST_ENDPOINT_STAGING} make test-ci
+          command: TEST_URL=${TEST_ENDPOINT_STAGING} node ./node_modules/jest/bin/jest.js
 
   deploy-production:
     executor: my-executor
@@ -102,7 +102,7 @@ jobs:
 
       - run:
           name: Test application
-          command: TEST_URL=${TEST_ENDPOINT_PROD} make test-ci
+          command: TEST_URL=${TEST_ENDPOINT_PROD} node ./node_modules/jest/bin/jest.js
 
 workflows:
   version: 2
