@@ -1,14 +1,14 @@
-"use strict";
-const chromium = require("chrome-aws-lambda");
+'use strict';
+const chromium = require('chrome-aws-lambda');
 
 const pdfOptions = {
   printBackground: true,
-  format: "A4",
+  format: 'A4',
   margin: {
-    top: "5mm",
-    right: "15mm",
-    bottom: "5mm",
-    left: "15mm",
+    top: '5mm',
+    right: '15mm',
+    bottom: '5mm',
+    left: '15mm',
   },
 };
 
@@ -31,14 +31,22 @@ const convertDoc = async (doc) => {
 };
 
 module.exports.convert = async (event) => {
-  const body = event.isBase64Encoded
-    ? new Buffer(event.body, "base64").toString()
-    : event.body;
-  const pdf = await convertDoc(body);
-  return {
-    statusCode: 200,
-    headers: { "Content-Type": "application/pdf" },
-    body: pdf.toString("base64"),
-    isBase64Encoded: true,
-  };
+  try {
+    const body = event.isBase64Encoded
+      ? new Buffer(event.body, 'base64').toString()
+      : event.body;
+    const pdf = await convertDoc(body);
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/pdf' },
+      body: pdf.toString('base64'),
+      isBase64Encoded: true,
+    };
+  } catch {
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Error converting file to PDF' }),
+    };
+  }
 };
