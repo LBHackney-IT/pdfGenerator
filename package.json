@@ -15,7 +15,7 @@
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.5",
     "puppeteer": "^3.0.1",
-    "serverless-offline": "^5"
+    "serverless-offline": "^12"
   },
   "scripts": {
     "test": "jest",
